@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import api from '../api/api'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import './App.css'
 
 function App() {
   const [breed, setBreeds] = useState([])
+
 
   useEffect(() => {
     async function loadBreeds() {
@@ -14,6 +17,8 @@ function App() {
     loadBreeds()
   }, [])
   return (
+    <>
+    <Header />
     <div className="App">
       {breed.map(breed => (
         <div key={breed.id}>
@@ -23,7 +28,9 @@ function App() {
         </div>
       ))}
     </div>
-
+    
+    <Footer/>
+</>
   )
 
 
