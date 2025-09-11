@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+import api from '../api/api'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [breed, setBreeds] = useState([])
 
+  useEffect(() => {
+    async function loadBreeds() {
+      const response = await api.get('/breeds')
+      console.log(response.data)
+      setBreeds(response.data)
+    }
+    loadBreeds()
+  }, [])
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="App">
+      {breed.map(breed => (
+        <div key={breed.id}>
+          <h1>{breed.name}</h1>
+          <img src={`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`} alt={breed.name} />
+          <p>{breed.breed_group}</p>
+        </div>
+      ))}
+    </div>
+
   )
+
+
 }
 
 export default App
