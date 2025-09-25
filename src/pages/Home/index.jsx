@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom"
 
-function End() {
+function Home() {
     return (
         <>
-            Agradecemos sua visita!
-            <Link to='../Dog/index'>
+           BEM VINDOS A API THE DOG
+            <Link to='../Dog/index.jsx'>
                 <button>
-                   Voltar para API
+                    Navegar para API
                 </button>
             </Link>
         </>
     )
 }
 
-export default End
+export default Home
